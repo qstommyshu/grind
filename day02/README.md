@@ -90,3 +90,5 @@ class Solution:
 ```
 
 This is incorrect as I didn't check the `min_len` in every step I shrink the array, but it still get the big idea. I think this shows skills to translate my thought to code is fine, but still not there yet. More practice should help!
+
+I didn't do spiral matrix today... but I read about it and got the general idea of it. Hopefully I can pick it up at some point.
