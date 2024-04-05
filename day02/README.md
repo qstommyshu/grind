@@ -1,3 +1,5 @@
+# Day 02
+
 Only file called README.md got display
 
 977. Squares of a Sorted Array
