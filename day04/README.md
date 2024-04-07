@@ -11,3 +11,6 @@ This question is pretty easy. Still, `dummy_head` eliminates the head node remov
 
 ## 160. Intersection of Two Linked Lists
 This question is also easy. We first loop through both `A` and `B` to get the length of the two linked list. And then match the starting position of the longer list head to the smaller list head. Then simultaneously loop through both of them and check if their current node are the same. If yes, return the node, otherwise they don't intersect.
+
+## 142. Linked List Cycle II
+There is a damn complicated solution for this question. I don't think it is possible to use this method in an interview. So I'm just sticking with a easy method, keep a set of visited nodes and check if this node appears again in the set.
