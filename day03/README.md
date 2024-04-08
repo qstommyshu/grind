@@ -108,7 +108,7 @@ class MyLinkedList:
         self.size -= 1
 ```
 
-206. Reverse Linked List
+## 206. Reverse Linked List
 This is the most cliche question ever in the stereotype of programmer. Yet I still didn't get it in one shot lol.
 The point of this quesiton is remember to use a variable to store any node that we might lost the reference to, when manipulating the linked list. 
 There are three variables I need to keep track of: prev, cur, temp(nxt), cur is for traversal, prev and temp are the nodes that we will lose reference of.
