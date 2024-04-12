@@ -23,7 +23,18 @@ else
     if [ $? -eq 0 ]; then
         # Since the directory is newly created, create a README.md file inside the directory
         touch "$dirName/README.md"
-        echo "Directory '$dirName' and README.md file created successfully."
+        
+        # Add content to README.md
+        echo "# day${day}" > "$dirName/README.md"
+        echo "" >> "$dirName/README.md"
+        echo "overview" >> "$dirName/README.md"
+        echo "" >> "$dirName/README.md"
+        echo "### question" >> "$dirName/README.md"
+        echo "thoughts" >> "$dirName/README.md"
+        echo "" >> "$dirName/README.md"
+        echo "# Conclusion" >> "$dirName/README.md"
+
+        echo "Directory '$dirName' and README.md file created successfully, with initial content added."
     else
         echo "Failed to create directory '$dirName'."
         exit 1
