@@ -33,6 +33,7 @@ class Solution:
 ```
 
 I was thinking about modifying the array in place initially, but then I see an answer returns a new array, everything became easy since then.
+</details>
 
 ## 209. Minimum Size Subarray Sum
 One of the solution idea of this question is to use sliding window. Initialize a pointer as the left boundary of the sliding window and a pointer as the right boundary of the sliding window. Move the right pointer, mean while check the subarry sum and update the minimum subarray sum. And shrink the left pointer if current subarray sum is larger than the target.
@@ -70,6 +71,10 @@ class Solution:
 </details>
 
 I almost got exactly this solution initially, but I oversight the question and thought only the subarray sum equals to the target will be considered. My previous solution is not as clean though...
+
+<details>
+<summary>Python Solution</summary>
+
 ```Python
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
@@ -98,6 +103,8 @@ class Solution:
             return 0
         return min_len
 ```
+</details>
+
 
 This is incorrect as I didn't check the `min_len` in every step I shrink the array, but it still get the big idea. I think this shows skills to translate my thought to code is fine, but still not there yet. More practice should help!
 
