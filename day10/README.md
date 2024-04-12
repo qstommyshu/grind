@@ -1,4 +1,4 @@
-# day08
+# day10
 
 Both question today are super easy. So I did extra question from Neetcode 150, binary search section to test out my skills.
 
