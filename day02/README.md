@@ -2,10 +2,12 @@
 
 Only file called README.md got display
 
-977. Squares of a Sorted Array
+## 977. Squares of a Sorted Array
 The idea of this question is to use two pointers to traverse through a sorted array in a absolute value order. And then return the squared value to a new array. Pretty easy once the thought is clear.
 
-Answer:
+<details>
+<summary>Python Solution</summary>
+
 ```Python
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
@@ -29,12 +31,15 @@ class Solution:
                 l += 1
         return res
 ```
+
 I was thinking about modifying the array in place initially, but then I see an answer returns a new array, everything became easy since then.
 
-209. Minimum Size Subarray Sum
+## 209. Minimum Size Subarray Sum
 One of the solution idea of this question is to use sliding window. Initialize a pointer as the left boundary of the sliding window and a pointer as the right boundary of the sliding window. Move the right pointer, mean while check the subarry sum and update the minimum subarray sum. And shrink the left pointer if current subarray sum is larger than the target.
 
-Answer:
+<details>
+<summary>Python Solution</summary>
+
 ```Python
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
@@ -61,6 +66,9 @@ class Solution:
             return 0
         return min_len
 ```
+
+</details>
+
 I almost got exactly this solution initially, but I oversight the question and thought only the subarray sum equals to the target will be considered. My previous solution is not as clean though...
 ```Python
 class Solution:
@@ -93,4 +101,56 @@ class Solution:
 
 This is incorrect as I didn't check the `min_len` in every step I shrink the array, but it still get the big idea. I think this shows skills to translate my thought to code is fine, but still not there yet. More practice should help!
 
-I didn't do spiral matrix today... but I read about it and got the general idea of it. Hopefully I can pick it up at some point.
+## 59. Spiral Matrix II
+This question is really tricky. It requires the developer to be really clear about the boundary of their program. Things like off by one error can really trick people off!
+
+One way to solve this question is to define traversal boundaries (here we need to think about the traversal intervals as well). Then traverse in a while loop, I feel like many other traversal questions can be done in the same way.
+
+<details>
+<summary>Python Solution</summary>
+
+```Python
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        # count layers
+        # max layer is (n + 1) // 2, for every direction, move two position
+
+        # 1. Think about how to traversal in the question
+        # if traverse two steps in each direction, then the middle value need to be deal with seperately.
+        # if define boundaries and go all the till the boundary, every case can be handled
+        matrix = [[-1] * n for _ in range(n)]
+
+        # define bounaries
+        top, bot, left, right = 0, n-1, 0, n-1
+        count = 1
+        # need to be clear about intervals
+        # left closed, right open
+        while top <= bot or left <= right:
+            # left to right
+            for i in range(left, right + 1):
+                matrix[top][i] = count
+                count += 1
+            top += 1
+            
+            # top to bot
+            for j in range(top, bot + 1):
+                matrix[j][right] = count
+                count += 1
+            right -= 1
+
+            # right to left
+            for k in range(right, left - 1, -1):
+                matrix [bot][k] = count
+                count += 1
+            bot -= 1
+
+            # bot to top
+            # for l in range(1, 2) -> 1 time
+            for l in range(bot, top - 1, -1):
+                matrix[l][left] = count
+                count += 1
+            left += 1
+        
+        return matrix
+```
+</details>
