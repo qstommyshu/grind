@@ -63,3 +63,13 @@ I did this question again just in case that I did not fully understand it yester
 
 # Conclusion
 I really see that some question in the leetcode is not easy to solve myself, what I can do is probably understand the solution and make sure I can explain the solution during the interview.
+
+When it is the next time I do binary search questions, I should follow this question list, and really need to care about how to define the search interval:
+
+1. 704 [Binary Search](https://leetcode.com/problems/binary-search/)
+2. 74 [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+3. 35 [Search Insert Position](https://leetcode.com/problems/search-insert-position/)
+4. 34 在排序数组中查找元素的第一个和最后一个位置
+5. 875[Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/)
+6. [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+7. [981. Time Based Key-Value Store](https://leetcode.com/problems/time-based-key-value-store/)
