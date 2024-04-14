@@ -32,6 +32,10 @@ else
         echo "### question" >> "$dirName/README.md"
         echo "thoughts" >> "$dirName/README.md"
         echo "" >> "$dirName/README.md"
+        echo "<details>" >> "$dirName/README.md"
+        echo "<summary>code</summary>" >> "$dirName/README.md"
+        echo "</details>" >> "$dirName/README.md"
+        echo "" >> "$dirName/README.md"
         echo "# Conclusion" >> "$dirName/README.md"
 
         echo "Directory '$dirName' and README.md file created successfully, with initial content added."
