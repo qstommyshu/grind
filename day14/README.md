@@ -135,6 +135,7 @@ class Solution:
 </details>
 
 ### TODO: add unified traversal version
+One of the most important point to understand the unified binary search tree traversal is the `Null` label. Any node pushed after a `Null` label is temporary, they are just path to get their nodes. Therefore, once we see `Null`, we started to add node value to result.
 
 # Conclusion
 Binary tree is a specific type of graph. It is very important to remember how to properly write recursion program. 
