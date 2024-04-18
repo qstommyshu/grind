@@ -39,4 +39,4 @@ So this question can be done in recursion:
 3. Recursion condition (traverse all the way to both left and right, and keep account of depth, if left depth == right depth, then it is a full binary tree. Node count is just math formula. If left depth != righ depth, then we need to go into recursion to calculate the left and right sub-tree node count)
 
 # Conclusion
-Recursion is powerful, but also quite tricky, need to clearly think about the base condition and recursion condition.
+Recursion is powerful, but also quite tricky, need to clearly think about the base condition and recursion condition. And for recursion, always write the most understandable version first, then optimize to the concise version. 
