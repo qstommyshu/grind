@@ -7,6 +7,9 @@
 Search space 的搜索区间定义需要深刻理解，后面很多题都要考这个，比如spiral matrix。
 
 正确答案：
+<details>
+<summary>Python code</summary>
+
 ```Python
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -30,12 +33,19 @@ class Solution:
                 r = mid
         return -1
 ```
+</details>
+
+
 今天其实犯了一个小错误，在else 里 r = mid - 1。这个错误其实就是搜索区间没定义好导致的，l 和 r 的initialization 还有 while l < r 定义了一个左闭右开区间`[)`但是在更新r 的时候 `r = mid + 1` 的话就会导致 `mid-1` 这个index 不会被搜索到（因为右边是开区间）。
 
 35. Search Insertion Position (中英文切换好累。。。) TODO: need to practice this type of search `prev` quesitons.
 <!-- This question is similar to 704. Binary search. However, it is a bit confusing to determine why we should return `r` at the end of the function. One important point to get this is we know the `target` should always insert to a poisition where target is smaller than the value in the index. -->
 
 I thought I understood my answer but I didn't. Need to revise.
+
+<details>
+<summary>Python code</summary>
+
 ```Python
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
@@ -56,11 +66,16 @@ class Solution:
                 r = mid
         return r
 ```
+</details>
+
 
 27. 移除元素
 这题主要就是考研对代码的掌控能力，但是很惭愧，python里的iterator到时我一开始甚至没写出暴力解法。。。
 这类似的题目不要再先update `left` 然后access `left`了，应该要先使用再update，不然容易乱!
 记住想出确切的方法后再开始写代码！
+<details>
+<summary>Python code</summary>
+
 ```Python
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
@@ -74,6 +89,9 @@ class Solution:
                 i -= 1
         return count
 ```
+</details>
+
+
 这里`i-=1`是不会update `i`的，因为`i`是由iterator生成的。但是用C++的话同样的写法就可以，i--可以update i:
 ```C++
 class Solution {
