@@ -3,7 +3,7 @@
 Only file called README.md got display
 
 ## 977. Squares of a Sorted Array
-The idea of this question is to use two pointers to traverse through a sorted array in a absolute value order. And then return the squared value to a new array. Pretty easy once the thought is clear.
+The idea of this question is to use two pointers to traverse through a sorted array in an absolute value order. And then return the squared value to a new array. Pretty easy once the thought is clear.
 
 <details>
 <summary>Python Solution</summary>
@@ -31,12 +31,13 @@ class Solution:
                 l += 1
         return res
 ```
-
-I was thinking about modifying the array in place initially, but then I see an answer returns a new array, everything became easy since then.
 </details>
+
+Notes:
+I was thinking about modifying the array in place initially, but then I see an answer returns a new array, everything became easy since then.
 
 ## 209. Minimum Size Subarray Sum
-One of the solution idea of this question is to use sliding window. Initialize a pointer as the left boundary of the sliding window and a pointer as the right boundary of the sliding window. Move the right pointer, mean while check the subarry sum and update the minimum subarray sum. And shrink the left pointer if current subarray sum is larger than the target.
+One of the solution idea of this question is to use sliding window. Initialize a pointer as the left boundary of the sliding window and a pointer as the right boundary of the sliding window. Move the right pointer, meanwhile check the subarray sum and update the minimum subarray sum. And shrink the left pointer if current subarray sum is larger than the target.
 
 <details>
 <summary>Python Solution</summary>
@@ -44,69 +45,33 @@ One of the solution idea of this question is to use sliding window. Initialize a
 ```Python
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        # sliding window
-        # start with l and r
-
-        if len(nums) == 0:
-            return 0
-        l = 0
-        arr_sum = 0
-        min_len = float('inf')
-
-        for r in range(len(nums)):
-            # move right boundary
-            arr_sum += nums[r]
-
-            # move left boundary only when in this condition
-            while arr_sum >= target:
-                min_len = min(min_len, r - l + 1)
-                arr_sum -= nums[l]
-                l += 1
-                        
-        if min_len == float('inf'):
-            return 0
-        return min_len
-```
-
-</details>
-
-I almost got exactly this solution initially, but I oversight the question and thought only the subarray sum equals to the target will be considered. My previous solution is not as clean though...
-
-<details>
-<summary>Python Solution</summary>
-
-```Python
-class Solution:
-    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        # sliding window
-        # start with l and r
-
-        if len(nums) == 0:
-            return 0
-        l = 0
-        arr_sum = 0
-        min_len = float('inf')
-
-        for r in range(len(nums)):
-            # move right boundary
-            arr_sum += nums[r]
-
-            # move left boundary only when in this condition
-            while l < r and arr_sum > target:
-                arr_sum -= nums[l]
-                l += 1
+#         sliding window
+#       right pointer move, while sum >= target, left pointer shrink
+#       then get the smallest
+#       left close, right close
+        min_len = float("inf")
+        left = 0
+        cur_sum = 0
+        for right in range(len(nums)):
+            cur_sum += nums[right]
+            while cur_sum >= target:
+                cur_len = right - left + 1
+                min_len = min(cur_len, min_len)
+                cur_sum -= nums[left]
+                left += 1
                 
-            if arr_sum >= target:
-                min_len = min(min_len, r-l + 1)
-        
-        if min_len == float('inf'):
-            return 0
-        return min_len
+                # # TODO: This order is incorrect, because after shifting left,l is not the number we look at anymore
+                # left += 1
+                # l = nums[left]
+                # cur_sum -= l
+
+        return min_len if min_len != float("inf") else 0
 ```
 </details>
 
-
-This is incorrect as I didn't check the `min_len` in every step I shrink the array, but it still get the big idea. I think this shows skills to translate my thought to code is fine, but still not there yet. More practice should help!
+Notes:
+1. For any sliding window question, make sure to take care of the case where the window length is not updated at all (being in its initialized value `float('inf')`), we should return the window length as `0` in this case.
+2. Make sure to use a value before updating it, `cur_sum -= nums[left]` before `left += 1`. Otherwise, the code cannot guarantee `cur_sum -= nums[left + 1]` is still greater than or equal to `target`. 
 
 ## 59. Spiral Matrix II
 This question is really tricky. It requires the developer to be really clear about the boundary of their program. Things like off by one error can really trick people off!
@@ -161,3 +126,55 @@ class Solution:
         return matrix
 ```
 </details>
+
+<details>
+<summary>Python Solution V2</summary>
+
+```Python
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        # first create empty matrix, then fill it
+        # while i < n**2?
+        # top, bottom, left, right?
+        # left close, right open
+        res = [[0 for _ in range(n)] for _ in range(n)]
+        num = 1
+        # paddings
+        top = 0
+        bottom = n - 1
+        left = 0
+        right = n - 1
+        # TODO: be careful of adding num breaks the while loop,
+        # another way is to initialize num as 0 and num += 1 before assignment
+        while num <= n ** 2:
+            # left to right at top row
+            for i in range(left, right + 1):
+                res[top][i] = num
+                num += 1
+            # finished top row
+            top += 1
+
+            # top to bottom at right column
+            for j in range(top, bottom + 1):
+                res[j][right] = num
+                num += 1
+            right -= 1
+
+            for k in range(right, left-1, -1):
+                res[bottom][k] = num
+                num += 1
+            bottom -= 1
+
+            for l in range(bottom, top-1, -1):
+                res[l][left] = num
+                num += 1
+            left += 1
+
+        return res
+```
+</details>
+
+Notes:
+1. Make sure you are clear about your logic before start coding.
+2. Think about different cases like when number is odd or even.
+3. Make sure your search range always follow the same pattern (i.e. left close right open or left close right close), note the search range definition is defined when initializing variables!

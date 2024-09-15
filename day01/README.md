@@ -1,7 +1,7 @@
 # Day 01
 
 今天又重新开始刷题了。第一天就go easy
-704. 二分查找
+### 704. 二分查找
 二分查找的本质就是把整个search space 切割成小份，最开始的版本可能甚至是recursion。在这个基础上非常重要的一点就是分割之后的search space定义要跟之前一样 （同时也要定义好搜索区间）。
 
 Search space 的搜索区间定义需要深刻理解，后面很多题都要考这个，比如spiral matrix。
@@ -35,10 +35,12 @@ class Solution:
 ```
 </details>
 
-
+Mistakes:
+1. Make the search interval is always well-defined. The search interval is defined when choosing the initial value of `left` and `right`, and make sure you stick to that interval definition when updating your search interval.
 今天其实犯了一个小错误，在else 里 r = mid - 1。这个错误其实就是搜索区间没定义好导致的，l 和 r 的initialization 还有 while l < r 定义了一个左闭右开区间`[)`但是在更新r 的时候 `r = mid + 1` 的话就会导致 `mid-1` 这个index 不会被搜索到（因为右边是开区间）。
 
-35. Search Insertion Position (中英文切换好累。。。) TODO: need to practice this type of search `prev` quesitons.
+35. Search Insertion Position. 
+TODO: need to practice this type of search `prev` quesitons.
 <!-- This question is similar to 704. Binary search. However, it is a bit confusing to determine why we should return `r` at the end of the function. One important point to get this is we know the `target` should always insert to a poisition where target is smaller than the value in the index. -->
 
 I thought I understood my answer but I didn't. Need to revise.
@@ -69,28 +71,29 @@ class Solution:
 </details>
 
 
-27. 移除元素
-这题主要就是考研对代码的掌控能力，但是很惭愧，python里的iterator到时我一开始甚至没写出暴力解法。。。
-这类似的题目不要再先update `left` 然后access `left`了，应该要先使用再update，不然容易乱!
-记住想出确切的方法后再开始写代码！
+### 27. 移除元素
+Make sure to code after your logic is clear!
 <details>
 <summary>Python code</summary>
 
 ```Python
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
-        count = len(nums)
-        for i in range(len(nums)):
-            if nums[i] == val:
-                for j in range(i+1, len(nums)):
-                    nums[j-1] = nums[j]
-                count -= 1
-                # this modification does not modify i as i is produced by iterator
-                i -= 1
-        return count
+#         two pointers: fast and slow ptrs
+#         if fast find any thing that is not val, replace the element at slow, then slow += 1
+#         just cover
+        slow = 0
+        for fast in range(len(nums)):
+            if nums[fast] != val:
+                nums[slow] = nums[fast]
+                slow += 1
+        return slow
+
 ```
 </details>
 
+Mistakes:
+1. Able to simulate the action but was not able to think clearly code it (especially in the logic of how to update slow pointer). Slow pointer here should only move forward when we know the next value that is not target. 
 
 这里`i-=1`是不会update `i`的，因为`i`是由iterator生成的。但是用C++的话同样的写法就可以，i--可以update i:
 ```C++
