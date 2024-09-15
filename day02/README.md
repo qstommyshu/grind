@@ -2,40 +2,6 @@
 
 Only file called README.md got display
 
-## 977. Squares of a Sorted Array
-The idea of this question is to use two pointers to traverse through a sorted array in an absolute value order. And then return the squared value to a new array. Pretty easy once the thought is clear.
-
-<details>
-<summary>Python Solution</summary>
-
-```Python
-class Solution:
-    def sortedSquares(self, nums: List[int]) -> List[int]:
-        # # brutal force
-        # for i in range(len(nums)):
-        #     nums[i] = nums[i] ** 2
-        # nums.sort()
-        # return nums
-
-        # two pointers
-        # initialize an result array, and then use two pointers to traverse the input nums array
-        res = []
-        l = 0
-        r = len(nums) - 1
-        while l <= r:
-            if abs(nums[r]) > abs(nums[l]):
-                res.insert(0, nums[r] ** 2)
-                r -= 1
-            else:
-                res.insert(0, nums[l] ** 2)
-                l += 1
-        return res
-```
-</details>
-
-Notes:
-I was thinking about modifying the array in place initially, but then I see an answer returns a new array, everything became easy since then.
-
 ## 209. Minimum Size Subarray Sum
 One of the solution idea of this question is to use sliding window. Initialize a pointer as the left boundary of the sliding window and a pointer as the right boundary of the sliding window. Move the right pointer, meanwhile check the subarray sum and update the minimum subarray sum. And shrink the left pointer if current subarray sum is larger than the target.
 

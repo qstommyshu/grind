@@ -39,7 +39,7 @@ Mistakes:
 1. Make the search interval is always well-defined. The search interval is defined when choosing the initial value of `left` and `right`, and make sure you stick to that interval definition when updating your search interval.
 今天其实犯了一个小错误，在else 里 r = mid - 1。这个错误其实就是搜索区间没定义好导致的，l 和 r 的initialization 还有 while l < r 定义了一个左闭右开区间`[)`但是在更新r 的时候 `r = mid + 1` 的话就会导致 `mid-1` 这个index 不会被搜索到（因为右边是开区间）。
 
-35. Search Insertion Position. 
+### 35. Search Insertion Position. 
 TODO: need to practice this type of search `prev` quesitons.
 <!-- This question is similar to 704. Binary search. However, it is a bit confusing to determine why we should return `r` at the end of the function. One important point to get this is we know the `target` should always insert to a poisition where target is smaller than the value in the index. -->
 
@@ -131,4 +131,37 @@ public:
     }
 };
 ```
-其实leetcode的重点就是想出解题思路，代码掌控能力练一练就差不多了。
+
+## 977. Squares of a Sorted Array
+The idea of this question is to use two pointers to traverse through a sorted array in an absolute value order. And then return the squared value to a new array. Pretty easy once the thought is clear.
+
+<details>
+<summary>Python Solution</summary>
+
+```Python
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        # # brutal force
+        # for i in range(len(nums)):
+        #     nums[i] = nums[i] ** 2
+        # nums.sort()
+        # return nums
+
+        # two pointers
+        # initialize an result array, and then use two pointers to traverse the input nums array
+        res = []
+        l = 0
+        r = len(nums) - 1
+        while l <= r:
+            if abs(nums[r]) > abs(nums[l]):
+                res.insert(0, nums[r] ** 2)
+                r -= 1
+            else:
+                res.insert(0, nums[l] ** 2)
+                l += 1
+        return res
+```
+</details>
+
+Notes:
+I was thinking about modifying the array in place initially, but then I see an answer returns a new array, everything became easy since then.
